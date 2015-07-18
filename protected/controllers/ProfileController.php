@@ -8,20 +8,29 @@ class ProfileController extends Controller
 	}
 
 	public function actionGet($user){
-		$query = Yii::app()->dbtoken->createCommand();
+		$user = json_decode($user);
+		$account = json_encode($this->get($user["uid"]));
 
-		$query = Yii::app()->dbprofile->createCommand();
-
-		$query->select("*");
-		$query->from("profile");
-		$query->where("id = :uid"), array("uid" => $user["uid"]);
-
-		$account = $query->queryRow();
 		$this->renderPartial("profile", array("account" => $account, "act" => "get"));
 	}
 
-	public function actionNew(){
+	public function actionNew($user){
+		$query = $this->connect();
 
+		$image = Yii::app()->createController("image/generate");
+		$avatar = $image[0]->actionGenerate();
+
+		$sql = "insert into profile(nickname, passwd, cdate, avatar_id) values(:nick, :pass, now(), :avatar)";
+		$query->bindParam(":nick", $user["nick"]);
+		$query->bindParam(":pass", md5($user["pass"]));
+		$query->bindParam(":avatar", $avatar["pid"]);
+
+		$query->execute();
+		$uid = $this->getLastUID();
+
+		$account = json_encode($this->get($uid));
+
+		$this->renderPartial("profile", array("account" => $account, "act" => "get"));
 	}
 
 	public function actionRemove($user){
@@ -32,12 +41,37 @@ class ProfileController extends Controller
 
 	}
 
+	//show brief account data for the forum, for example
+	public function actionBrief($user){
+		
+	}
+
 	private function save($user){
 
 	}
 
-	private function delete($id){
+	private function delete($uid){
 
+	}
+
+	private function get($uid){
+		$query = $this->connect();
+
+		$query->select("*");
+		$query->from("profile");
+		$query->where("id = :uid"), array("uid" => $user["uid"]);
+
+		$account = $query->queryRow();
+
+		return $account;
+	}
+
+	private function connect(){
+		return Yii::app()->dbprofile->createCommand();
+	}
+
+	private function getLastUID(){
+		return Yii::app()->dbprofile->getLastInsertID();
 	}
 
 	// Uncomment the following methods and override them if needed
