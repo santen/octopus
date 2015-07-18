@@ -1,43 +1,10 @@
 <?php
 
-class ProfileController extends Controller
+class TokenController extends Controller
 {
 	public function actionMain()
 	{
 		$this->render('main');
-	}
-
-	public function actionGet($user){
-		$query = Yii::app()->dbtoken->createCommand();
-
-		$query = Yii::app()->dbprofile->createCommand();
-
-		$query->select("*");
-		$query->from("profile");
-		$query->where("id = :uid"), array("uid" => $user["uid"]);
-
-		$account = $query->queryRow();
-		$this->renderPartial("profile", array("account" => $account, "act" => "get"));
-	}
-
-	public function actionNew(){
-
-	}
-
-	public function actionRemove($user){
-
-	}
-
-	public function actionUpdate($user){
-
-	}
-
-	private function save($user){
-
-	}
-
-	private function delete($id){
-
 	}
 
 	// Uncomment the following methods and override them if needed

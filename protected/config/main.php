@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Octopus',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -51,6 +51,13 @@ return array(
 
 		// database settings are configured in database.php
 		'db'=>require(dirname(__FILE__).'/database.php'),
+		'dbprofile'=> array(
+			'connectionString' => 'mysql:host=localhost;dbname=profile',
+			'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => 'siteserver',
+			'charset' => 'utf8',	
+			),
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
