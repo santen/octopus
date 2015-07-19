@@ -4,11 +4,26 @@ class OctopusController extends Controller
 {
 	public function actionMain()
 	{
+		$con = $this->connect();
 		$this->render('main');
 	}
 
-	public function actionRoute($name){
-		
+	public function getRoute($name){
+		$query = $this->connect();
+
+		$query->select("*");
+		$query->from("route");
+		$query->where("service = :name", array("name" => name));
+
+		return json_encode($query->queryRow());
+	}
+
+	public function getNumber(){
+		return 3;
+	}
+
+	private function connect(){
+		return Yii::app()->dboctopus->createCommand();
 	}
 
 	// Uncomment the following methods and override them if needed

@@ -4,7 +4,9 @@ class ProfileController extends Controller
 {
 	public function actionMain()
 	{
-		$this->render('main');
+		$route = Yii::app()->createController("octopus/getnumber");
+		$num = $route[0]->getnumber();
+		$this->render('main', array("num" => $num));
 	}
 
 	public function actionGet($user){
@@ -17,7 +19,10 @@ class ProfileController extends Controller
 	public function actionNew($user){
 		$query = $this->connect();
 
-		$image = Yii::app()->createController("image/generate");
+		$route = Yii::app()->createController("octopus/main");
+		$imageRoute = $route[0]->getRoute("image");
+
+		$image = Yii::app()->createController($imageRoute."/generate");
 		$avatar = $image[0]->actionGenerate();
 
 		$sql = "insert into profile(nickname, passwd, cdate, avatar_id) values(:nick, :pass, now(), :avatar)";
@@ -38,16 +43,27 @@ class ProfileController extends Controller
 	}
 
 	public function actionUpdate($user){
+		$result = $this->save($user, "removed", 1);
 
+		if($result == 1)
+			$this->renderPartial("profile", array("val" => true, "act" => "upd"));
+		else
+			$this->renderPartial("profile", array("val" => false, "act" => "upd"));
 	}
 
 	//show brief account data for the forum, for example
-	public function actionBrief($user){
-		
+	public function actionBrief($users){
+		//get avatar, nick, common rating, mind
+
+		for($i = 0, $i < count($users); $i++){
+
+		}
 	}
 
-	private function save($user){
+	private function save($uid, $field, $val){
+		$query = $this->connect();
 
+		return $query->update("profile", array($field => $val), "id=:id", array(":id" => $uid));
 	}
 
 	private function delete($uid){
@@ -59,11 +75,15 @@ class ProfileController extends Controller
 
 		$query->select("*");
 		$query->from("profile");
-		$query->where("id = :uid"), array("uid" => $user["uid"]);
+		$query->where("id = :uid", array("uid" => $user["uid"]));
 
 		$account = $query->queryRow();
 
 		return $account;
+	}
+
+	private function getBrief($uid){
+		
 	}
 
 	private function connect(){

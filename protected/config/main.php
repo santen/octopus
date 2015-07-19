@@ -52,11 +52,20 @@ return array(
 		// database settings are configured in database.php
 		'db'=>require(dirname(__FILE__).'/database.php'),
 		'dbprofile'=> array(
+			'class'=>'CDbConnection',
 			'connectionString' => 'mysql:host=localhost;dbname=profile',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'siteserver',
-			'charset' => 'utf8',	
+			'charset' => 'utf8',
+			),
+		'dboctopus'=>array(
+			'class'=>'CDbConnection',
+			'connectionString' => 'mysql:host=localhost;dbname=octopus',
+			'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => 'siteserver',
+			'charset' => 'utf8',
 			),
 
 		'errorHandler'=>array(
