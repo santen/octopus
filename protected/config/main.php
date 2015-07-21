@@ -67,6 +67,14 @@ return array(
 			'password' => 'siteserver',
 			'charset' => 'utf8',
 			),
+		'dbimage'=>array(
+			'class'=>'CDbConnection',
+			'connectionString' => 'mysql:host=localhost;dbname=image',
+			'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => 'siteserver',
+			'charset' => 'utf8',
+			),
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

@@ -7,6 +7,71 @@ class ImageController extends Controller
 		$this->render('main');
 	}
 
+	public function actionUpload(){
+
+	}
+
+	//@param size = xs||sm||md||lg default value is original
+	public function actionGetLink($pid, $size){
+
+		switch(strtolower($size)){
+			case "xs":
+				$image = $this->getPicture($pid, "xs");
+				break;
+			case "sm":
+				$image = $this->getPicture($pid, "sm");
+				break;
+			case "md":
+				$image = $this->getPicture($pid, "md");
+				break;
+			case "lg":
+				$image = $this->getPicture($pid, "lg");
+				break;
+			default:
+				$image = $this->getOrigin($pid);
+		}
+
+		$this->renderPartial("getlink", array("picture" => json_encode($image)))
+	}
+
+	public function actionConfirmed($pid){
+		$query = $this->connect();
+
+		$result = $query->update("image", array("is_temp" => 0), "id=:id", array(":id" => $pid));
+
+		if($result == 1)
+			renderPartial("picture", array("act" => "upd", "res" = true));
+		else
+			renderPartial("picture", array("act" => "upd", "res" = false));
+	}
+
+	private function getOrigin($pid){
+		$query = $this->connect();
+
+		$query->select("origin");
+		$query->from("image");
+		$query->where("id = :id", array(":id" => $pid));
+
+		return $query->queryRow();
+	}
+
+	private function getPicture($pid, $size){
+		$query = $this->connect();
+
+		$query->select($size);
+		$query->from("size");
+		$query->where("image_id = :id", array(":id" => $pid));
+
+		return $query->queryRow();
+	}
+
+	private function connect(){
+		return Yii::app()->dbimgae->createCommand();
+	}
+
+	private function getLastUID(){
+		return Yii::app()->dbimage->getLastInsertID();
+	}
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()
