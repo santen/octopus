@@ -8,7 +8,15 @@ class ImageController extends Controller
 	}
 
 	public function actionUpload(){
+		$picture = $_FILES["picture"];
 
+		$extension = $this->getExtension($picture["name"]);
+		$image = new CUploadedFile($picture, $picture["tmp_name"], "image/".$extension, $picture["size"], 0);
+		$image->saveAs($path);
+
+		$response = array();
+		array_push("response", $this->save($path));		
+			$this->renderPartial("uploaded", array("response" => json_encode($response)));
 	}
 
 	//@param size = xs||sm||md||lg default value is original
@@ -39,10 +47,20 @@ class ImageController extends Controller
 
 		$result = $query->update("image", array("is_temp" => 0), "id=:id", array(":id" => $pid));
 
-		if($result == 1)
+		if($result == 1){
+			$this->toResizeQueue($pid);
 			renderPartial("picture", array("act" => "upd", "res" = true));
+		}
 		else
 			renderPartial("picture", array("act" => "upd", "res" = false));
+	}
+
+	private function toResizeQueue($pid){
+		$sql = "insert into resize_queue (image_id, cdate) values(:pid, now())";
+
+		$query = $this->connect();
+		$query->bindParam(":pid", $pid);
+		return $query->execute();
 	}
 
 	private function getOrigin($pid){
@@ -71,6 +89,16 @@ class ImageController extends Controller
 
 	private function getLastUID(){
 		return Yii::app()->dbimage->getLastInsertID();
+	}
+
+	private function save(){
+		$sql = "insert into image () values()";
+	}
+
+	private function getExtension($filename){
+		$extension = explode(".", $filename)[1];
+
+		return $extension;
 	}
 	// Uncomment the following methods and override them if needed
 	/*
