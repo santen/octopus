@@ -2,6 +2,8 @@
 
 class ProfileController extends Controller
 {
+	$layout = "account";
+	
 	public function actionMain()
 	{
 		$route = Yii::app()->createController("octopus/getnumber");

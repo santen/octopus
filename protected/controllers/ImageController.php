@@ -11,6 +11,7 @@ class ImageController extends Controller
 		$picture = $_FILES["picture"];
 
 		$extension = $this->getExtension($picture["name"]);
+		$path = "pictures/";
 		$image = new CUploadedFile($picture, $picture["tmp_name"], "image/".$extension, $picture["size"], 0);
 		$image->saveAs($path);
 
