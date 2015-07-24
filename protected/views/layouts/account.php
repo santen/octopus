@@ -7,13 +7,10 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/toptoolbar.css">	
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/lefttoolbar.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/content.css?54234">	
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/lib/scrollbar/css/perfect-scrollbar.min.css">	
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/lib/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-2.1.3.min.js" language="JavaScript"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/bootstrap-3.3.2/js/bootstrap.min.js" language="JavaScript"></script>	
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/scrollbar/js/perfect-scrollbar.jquery.js" language="JavaScript"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/coral.js" language="JavaScript"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/jQuery/jquery-2.1.3.min.js" language="JavaScript"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/bootstrap-3.3.2/js/bootstrap.min.js" language="JavaScript"></script>		
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/octopus.js" language="JavaScript"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
