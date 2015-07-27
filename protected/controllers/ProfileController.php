@@ -2,14 +2,28 @@
 
 class ProfileController extends Controller
 {
-	$layout = "account";
-	
+	public $layout = "account";
+
 	public function actionMain()
 	{
 		$route = Yii::app()->createController("octopus/getnumber");
 		$num = $route[0]->getnumber();
+
 		$this->render('main', array("num" => $num));
 	}
+
+	/*public function actionLogin(){
+		//$layout = "land";
+		//$this->render("login");
+	}
+
+	public function actionLogin($person){
+		//$user = json_decode($person);
+	}
+
+	public function actionLogout($pid){
+
+	}*/
 
 	public function actionGet($user){
 		$user = json_decode($user);
@@ -84,7 +98,7 @@ class ProfileController extends Controller
 
 		$route = Yii::app()->createController($picService."/getlink");
 		$profiles = array();
-		for($i = 0, $i < count($users); $i++){
+		for($i = 0; $i < count($users); $i++){
 			array_push($profiles, $this->getBrief($user["uid"]));
 			
 			$image = $route[0]->getLink($profiles[$i]["avatar_id"], "xs");

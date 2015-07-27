@@ -7,6 +7,25 @@ class TokenController extends Controller
 		$this->render('main');
 	}
 
+	public function actionGetState($uid){
+		$query = $this->connect();
+
+		$query->select("*");
+		$query->from("token");
+		$query->where("uid = :id", array(":id" => $uid));
+
+		$state = $query->queryRow();
+
+		$this->renderPartial("getstate", array("state" => $state));
+	}
+
+	private function connect(){
+		return Yii::app()->dbtoken->createCommand();
+	}
+
+	private function getLastUID(){
+		return Yii::app()->dbtoken->getLastInsertID();
+	}
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()
