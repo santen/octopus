@@ -12,18 +12,24 @@ class ProfileController extends Controller
 		$this->render('main', array("num" => $num));
 	}
 
-	/*public function actionLogin(){
-		//$layout = "land";
-		//$this->render("login");
+	public function actionSignIn($jUser){
+		$login = false;
+
+		$user = json_decode($jUser);
+
+		$query = connect();
+		$query->select("*");
+		$query->from("profile");
+		$query->where("id = :id and passwd = :pass and soap = :soap", 
+					  array(":id" => $user["uid"],
+					  		":pass" => $user["hash"],
+					  		":soap" => $user["email"]));
+
+		if($query->queryRow() > 0)
+			$login = true;
+
+		$this->renderPartial("signin", array("signin" => $login));
 	}
-
-	public function actionLogin($person){
-		//$user = json_decode($person);
-	}
-
-	public function actionLogout($pid){
-
-	}*/
 
 	public function actionGet($user){
 		$user = json_decode($user);
