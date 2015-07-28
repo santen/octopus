@@ -47,8 +47,9 @@ class ProfileController extends Controller
 		$image = Yii::app()->createController($imageRoute."/generate");
 		$avatar = $image[0]->actionGenerate();
 
-		$sql = "insert into profile(nickname, passwd, cdate, avatar_id) values(:nick, :pass, now(), :avatar)";
-		$query->bindParam(":nick", $user["nick"]);
+		$sql = "insert into profile(soap, soap_hashed, passwd, cdate, avatar_id) values(:soap, :soap_hashed, :pass, now(), :avatar)";
+		$query->bindParam(":soap", $user["soap"]);
+		$query->bindParam(":soap_hashed", md5($user["soap"]));
 		$query->bindParam(":pass", md5($user["pass"]));
 		$query->bindParam(":avatar", $avatar["pid"]);
 
@@ -148,8 +149,11 @@ class ProfileController extends Controller
 		return $query->queryRow();
 	}
 
-	private function connect(){
-		return Yii::app()->dbprofile->createCommand();
+	private function connect($command = ""){
+		if(count($command) == 0)
+			return Yii::app()->dbprofile->createCommand();
+		else
+			return Yii::app()->dbprofile->createCommand($command);
 	}
 
 	private function getLastUID(){
