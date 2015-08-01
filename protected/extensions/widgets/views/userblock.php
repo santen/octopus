@@ -1,16 +1,19 @@
 <div class="user-block">
-	<div class="avatar-wrap">
-		<div class="avatar-xs">
-			<?php echo "<img src='".$user["avatar"]."'>"; ?>
-		</div>
-	</div>
-	<div class="user-name">
-		<?php echo $user["nick"]; ?>
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">					
-			<span class="caret"></span>
-		</a>
-	</div>
-</div>
-<div class="user-rating">
-	&nbsp;<?php echo $user["rating"]; ?>&nbsp;
+	<?php 
+		if(count($user) > 0){
+			echo "<div class='avatar-wrap'>";
+			echo "<div class='avatar-xs'>";
+			echo "<img src='".$user["avatar"]."'>";
+			echo "</div></div>";
+			echo "<div class='user-name'>";
+			echo $user["nick"];
+			echo "<a href='#'' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>";
+			echo "<span class='caret'></span>";
+			echo "</a></div></div>";
+			echo "<div class='user-rating'>";
+			echo "&nbsp;".$user["rating"]."&nbsp;";
+		}
+		else
+			echo "<button type='button' class='btn btn-default' id='signinBtn'>Войти</button>";
+	?>
 </div>

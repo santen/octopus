@@ -108,3 +108,213 @@ html, body{
 .avatar-rounded{
 	border-radius: 10px;
 }
+
+/* TopToolBar */
+
+#top-toolbar{
+	width: inherit;
+	height: 50px;	
+	border-style: solid;
+	border-width: 1px;
+	border-color: #727271;
+	border-radius: 0 0 10px 10px;
+	background: rgba(255, 255, 255, 0.8);
+	position: fixed;
+	z-index: 10;
+}
+
+.logo-block{
+	width: 120px;
+	height: 40px;
+	top: 5px;
+	left: 10px;
+	position: absolute;
+}
+
+.search-block{
+	width: 400px;
+	top: 10px;
+	left: 170px;
+	position: absolute;
+}
+
+.buttons-block{
+	width: 150px;
+	top: 7px;
+	left: 590px;
+	position: absolute;
+}
+
+.user-block{
+	width: 200px;
+	top: 5px;
+	right: 10px;
+	position: absolute;
+}
+
+.user-name{
+	margin-left: 10px;
+	vertical-align: middle;
+	font-size: 18px;
+	display: inline-block;
+}
+
+.user-rating{
+	height: 15px;
+	bottom: 10px;
+	right: 20px;
+	line-height: 15px;
+	border-radius: 10px;
+	background-color: #31c833;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	position: absolute;
+}
+
+/* end TopToolBar */
+
+/* LeftToolBar */
+
+#left-toolbar{
+	width: 70px;
+	height: 90%;
+	top: 90px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #727271;
+	background: #fff;
+	position: fixed;
+	z-index: 10;
+}
+
+.left-btn{
+	width: 68px;
+	height: 68px;
+	background-color: #a2d9f7;
+	border-style: solid;
+	border-color: #727271;
+	border-width: 0 0 1px 0;
+	line-height: 68px;
+	text-align: center;
+}
+
+#home-btn{
+	background: url("/coral/images/coral_icons.png") no-repeat -133px 16px #a2d9f7;
+}
+
+#home-btn.active{
+	background: url("/coral/images/coral_icons.png") no-repeat -133px -47px #a2d9f7;
+}
+
+#dialog-btn{
+	background: url("/coral/images/coral_icons.png") no-repeat -276px 16px #a2d9f7;
+}
+
+#dialog-btn.active{
+	background: url("/coral/images/coral_icons.png") no-repeat -276px -47px #a2d9f7;
+}
+
+#favorite-btn{
+	background: url("/coral/images/coral_icons.png") no-repeat -421px 16px #a2d9f7;
+}
+
+#favorite-btn.active{
+	background: url("/coral/images/coral_icons.png") no-repeat -421px -47px #a2d9f7;
+}
+
+#comment-btn{
+	background: url("/coral/images/coral_icons.png") no-repeat -348px 16px #a2d9f7;
+}
+
+#comment-btn.active{
+	background: url("/coral/images/coral_icons.png") no-repeat -348px -47px #a2d9f7;
+}
+
+#notify-btn{
+	background: url("/coral/images/coral_icons.png") no-repeat -204px 16px #a2d9f7;
+}
+
+#notify-btn.active{
+	background: url("/coral/images/coral_icons.png") no-repeat -204px -47px #a2d9f7;
+}
+
+#communities-btn{
+	top: 150px;
+	left: 0;
+	margin: 0 auto;
+	border-width: 1px 0 1px 0;
+	background: url("/coral/images/coral_icons.png") no-repeat 8px 16px #a2d9f7;
+	position: relative;
+}
+
+#communities-btn.active{	
+	background: url("/coral/images/coral_icons.png") no-repeat 8px -47px #a2d9f7;
+}
+
+#write-btn{
+	top: 150px;
+	left: 0;
+	background: url("/coral/images/coral_icons.png") no-repeat -59px 16px #a2d9f7;
+	position: relative;
+}
+
+#write-btn.active{
+	background: url("/coral/images/coral_icons.png") no-repeat -59px -47px #a2d9f7;
+}
+
+#communities-panel{	
+	height: 70px;
+	width: 400px;
+	padding-left: 60px;	
+	position: fixed;
+	display: none;
+	z-index: 10;
+}
+
+.back-layout{
+	width: 410px;
+	height: 80px;
+	background: rgba(255, 255, 255, 0.1);
+	z-index: 0;
+	display: none;
+}
+
+.community-wrap{
+	margin-left: 5px;
+	display: inline-block;
+}
+
+@media screen and (max-height: 900px) {
+	#communities-btn, #write-btn {
+		top: 50px;
+	}
+}
+
+@media screen and (max-height: 600px){
+	#communities-btn, #write-btn {
+		display: none;
+	}
+}
+
+.community-caret{
+	width: 8px;
+	height: 8px;
+	bottom: 2px;
+	right: 2px;
+	border: 8px solid transparent;
+	border-right: 8px solid #193b9c;
+	border-bottom: 8px solid #193b9c;
+	position: absolute;
+}
+
+span.glyphicon-home {
+    font-size: 25px;
+    color: #193b9c;
+}
+
+/* end LeftToolbar */
+
+/* Profile settings */
+
+/* end Profile settings */

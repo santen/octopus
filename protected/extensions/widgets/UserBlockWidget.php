@@ -1,6 +1,6 @@
 <?php
 
-class ToptoolbarWidget extends CWidget
+class UserBlockWidget extends CWidget
 {
 	public function init()
 	{
@@ -11,8 +11,9 @@ class ToptoolbarWidget extends CWidget
 	{
 		$state = false;		
 		$jUser = array();
+		$user = array();
 
-		if(isset($_COOKIE["octo"])){			
+		/*if(isset($_COOKIE["octo"])){			
 			$octopus = json_parse($_COOKIE["octo"]);
 
 			array_push($jUser, array("uid" => $octopus["uid"]));
@@ -24,16 +25,15 @@ class ToptoolbarWidget extends CWidget
 
 			if($state){
 				$account = json_decode($profile[0]->get($jUser["uid"]));
-
-				$user = array();
+				
 				array_push($user, array("uid" => $account["uid"]));
 				array_push($user, array("avatar" => $account["avatar"]));
 				array_push($user, array("nick" => $account["nick"]));
 				array_push($user, array("rating" => "12.03"));
 			}
-		}
+		}*/
 
-		$this->render('toptoolbar', array('user' => $user));
+		$this->render('userblock', array('user' => $user));
 	}
 }
 

@@ -18,6 +18,6 @@
 		</button>
 	</div>
 	<div id="userBlock">
-		<!-- userBlockWidget -->
+		<?php $this->widget('application.extensions.widgets.UserBlockWidget'); ?>
 	</div>
 </div>

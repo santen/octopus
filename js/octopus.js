@@ -24,5 +24,9 @@ $(document).ready(function(){
 	$(".back-layout").mouseover(function(){
 		$(".back-layout").hide();
 		$("#communities-panel").hide();
-	});	
+	});
+
+	$("#signinBtn").click(function(){
+		$("#authWindow").show();
+	});
 });
