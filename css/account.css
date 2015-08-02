@@ -1,3 +1,43 @@
+/* Common styles */
+
+.tabs-bar{
+	width: 100%;
+	height: 30px;
+}
+
+.tab{
+	height: 30px;
+	padding: 0 20px;
+	margin-right: 5px;
+	background: #00a0e3;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+	line-height: 30px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.tab-active{
+	height: 30px;
+	padding: 0 20px;
+	margin-right: 5px;
+	background: #33cc33;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+	line-height: 30px;
+	display: inline-block;
+}
+
+.tabs-toolbar{
+	height: 30px;
+	margin-left: 30px;
+	display: inline-block;
+}
+
+/* end Common Styles */
+
 html, body{
 	height: 100%;
 	overflow: hidden;
@@ -317,4 +357,252 @@ span.glyphicon-home {
 
 /* Profile settings */
 
+.page-layout{
+	width: 1110px;
+	height: inherit;
+	padding-top: 10px;
+	border-style: solid;
+	border-color: #193b9c;
+	border-width: 0 1px 1px 1px;	
+}
+
+.community-bar{
+	width: 87px;
+	height: 100%;
+	margin-top: -10px;
+	padding-bottom: 20px;
+	float: left;
+	position: relative;
+}    
+
+.arrow-up{
+	width: 100%;
+	height: 40px;
+	margin-bottom: 20px;
+	background: rgba(255, 255, 255, 0.6);
+	text-align: center;
+}
+
+.content-layout{
+	width: 990px;
+	margin-left: 20px;
+	float: left;
+}
+
+.post-layout{
+
+}
+
+.post-status{
+	width: inherit;
+	height: 30px;
+	margin-top: 10px;
+}
+
+.post-header{
+	width: inherit;
+}
+
+.post-title{
+	font-size: 22px;
+	color: #008dd2;
+}
+
+.post-date{
+	font-size: 12px;
+	color: #ef7f1a;
+}
+
+.post-community{	
+	font-size: 18px;
+	color: #003399;
+	display: inline-block;
+}
+
+.post-brief{
+	text-align: justify;
+	font-size: 16px;
+	color: #000;
+}
+
+.post-author{
+	width: 30px;
+	height: 30px;
+	background: url("/coral/images/user_icon.png");
+	line-height: 50px;
+	padding-left: 20px;
+	float: left;
+}
+
+.post-mark{
+	height: 30px;
+	padding: 3 10px;
+	margin-right: 30px;
+	line-height: 30px;
+	float: left;
+}
+
+.mark-plus{
+	width: 24px;
+	height: 30px;
+	background: url("/coral/images/up_icon.png") no-repeat -3px 0px;
+	float: left;
+}
+
+.mark-minus{
+	width: 24px;
+	height: 30px;
+	margin-left: -4px;
+	background: url("/coral/images/down_icon.png") no-repeat 0px 0px;
+	float: left;
+}
+
+.post-rating{
+	height: 18px;
+	line-height: 20px;
+	padding: 0 10px;
+	margin: 4px 2px;
+	border-radius: 15px;
+	background-color: #31c833;
+	color: #fff;
+	font-weight: bold;
+	font-size: 16px;
+	text-align: center;
+	float: left;
+}
+
+.post-tags{
+	height: 16px;
+	margin-top: 10px;
+	font-size: 12px;
+	color: #57a7b3;
+}
+
+.post-comments{
+	height: 30px;
+	padding-left: 19px;
+	margin-right: 20px;
+	color: #ef7f1a;
+	font-weight: bold;
+	font-size: 16px;
+	background: url("/coral/images/comment_icon.png") no-repeat 0px 0px;
+	float: left;
+	line-height: 43px;
+}
+
+.post-favorite{
+	height: 30px;
+	padding-left: 35px;
+	margin-right: 20px;
+	color: #ef7f1a;
+	background: url("/coral/images/star_icon.png") no-repeat 0px -3px;
+	float: left;
+	line-height: 30px;
+}
+
+.post-views{
+	height: 30px;
+	padding-left: 42px;
+	margin-right: 20px;
+	color: #008dd2;	
+	background: url("/coral/images/views_icon.png") no-repeat 0px 0px;
+	float: left;
+	line-height: 30px;
+}
+
+.post-read{
+
+}
+
+.community-name{
+
+}
+
+table.settings{
+	width: 900px;
+	margin-left: 130px;
+	border: 0;
+}
+
+.community-avatar{
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+.form-container{
+	width: 400px;
+}
+
+.avatar-settings{
+	margin-right: 30px;
+}
+
+.upload-avatar{
+	display: none;
+}
+
 /* end Profile settings */
+
+/* Auth Window */
+
+#authWindow{
+	width: 400px;
+	height: 330px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #727271;
+	border-radius: 15px;
+	background-color: #fff;
+	position: absolute;
+	display: none;
+	z-index: 40;
+}
+
+.auth-header{
+	width: 100%;
+	height: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.auth-block-1{
+	width: 45%;
+	height: 10px;
+	background-color: #81dd82;
+	margin-right: 10px;
+	border-radius: 10px 0 0 0;
+	display: inline-block;
+}
+
+.auth-block-2{
+	width: 25%;
+	height: 10px;
+	background-color: #68b8ff;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.auth-block-3{
+	width: 22%;
+	height: 10px;
+	border-radius: 0 10px 0 0;
+	background-color: #0090cf;	
+	display: inline-block;
+}
+
+.auth-body{
+	width: 100%;
+	height: 100%;
+	padding: 20px 10px 20px 10px;
+}
+
+#signUpForm{
+	display: none;
+}
+
+/* end Auth Window */

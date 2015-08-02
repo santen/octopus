@@ -3,17 +3,18 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="language" content="en">
-	
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css?3242">
+		
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/account.css?3242">
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/lib/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/jQuery/jquery-2.1.3.min.js" language="JavaScript"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/jQuery/jquery-ui.min.js" language="JavaScript"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/bootstrap-3.3.2/js/bootstrap.min.js" language="JavaScript"></script>		
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/octopus.js" language="JavaScript"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/octopus.js?8943" language="JavaScript"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
+	<?php $this->widget('application.extensions.widgets.AuthWidget'); ?>
 	<div class="back-layout"></div>
 	<div class="cor-container">
 		<?php $this->widget('application.extensions.widgets.ToptoolbarWidget'); ?>
@@ -63,6 +64,6 @@
 			<?php echo $content; ?>
 		</div>
 	
-	</div>
+	</div>	
 </body>
-</head>
+</html>

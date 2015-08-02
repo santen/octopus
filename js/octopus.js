@@ -1,5 +1,5 @@
 $(document).ready(function(){	
-    $(".community-bar").perfectScrollbar();	
+    //$(".community-bar").perfectScrollbar();	
 
     var communitiesBtn = {
 			top: $("#communities-btn").offset().top,
@@ -28,5 +28,21 @@ $(document).ready(function(){
 
 	$("#signinBtn").click(function(){
 		$("#authWindow").show();
+	});
+
+	$("#signinTab").click(function(){
+		$("#signinTab").switchClass("tab", "tab-active");
+		$("#signupTab").switchClass("tab-active", "tab");
+
+		$("#signUpForm").hide();
+		$("#signInForm").show();
+	});
+
+	$("#signupTab").click(function(){
+		$("#signinTab").switchClass("tab-active", "tab");
+		$("#signupTab").switchClass("tab", "tab-active");
+
+		$("#signUpForm").show();
+		$("#signInForm").hide();
 	});
 });
