@@ -2,12 +2,12 @@
 	<?php 
 		if(count($user) > 0){
 			echo "<div class='avatar-wrap'>";
-			echo "<div class='avatar-xs'>";
-			echo "<img src='".$user["avatar"]."'>";
-			echo "</div></div>";
+			//echo "<div class='avatar-xs'>";
+			echo "<img class='avatar-xs' src='".$user["avatar"]."'>";
+			echo "</div>";
 			echo "<div class='user-name'>";
 			echo $user["nick"];
-			echo "<a href='#'' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>";
+			echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>";
 			echo "<span class='caret'></span>";
 			echo "</a></div></div>";
 			echo "<div class='user-rating'>";

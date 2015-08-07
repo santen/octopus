@@ -18,25 +18,25 @@
 				<label for="">Пароль:</label>
 				<input type="password" class="form-control" id="pass">
 			</div>
-			<button type="submit" class="btn btn-primary">Войти</button>
-			<button type="submit" class="btn btn-warning">Отмена</button>
+			<button type="button" class="btn btn-primary" id="enterBtn">Войти</button>
+			<button type="button" class="btn btn-warning" id="authCancelBtn">Отмена</button>
 		</form>
 
-		<form action="" method="POST" role="form" id="signUpForm">
+		<form action="index.php?r=profile/new" method="POST" role="form" id="signUpForm">
 			<div class="form-group">
 				<label for="">Ваша почта:</label>
-				<input type="text" class="form-control" id="email">
+				<input type="text" class="form-control" id="emailr" name="emailr">
 			</div>
 			<div class="form-group">
 				<label for="">Пароль:</label>
-				<input type="password" class="form-control" id="pass">
+				<input type="password" class="form-control" id="passr" name="passr">
 			</div>
 			<div class="form-group">
 				<label for="">Повторите пароль:</label>
-				<input type="password" class="form-control" id="retype">
+				<input type="password" class="form-control" id="retype" name="retype">
 			</div>
-			<button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-			<button type="submit" class="btn btn-warning">Отмена</button>
+			<button type="button" class="btn btn-primary" id="regBtn">Зарегистрироваться</button>
+			<button type="button" class="btn btn-warning" id="authCancelBtn">Отмена</button>
 		</form>
 	</div>
 </div>

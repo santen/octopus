@@ -16,7 +16,8 @@ class ImageController extends Controller
 		$image->saveAs($path);
 
 		$response = array();
-		array_push("response", $this->save($path));		
+		$id = $this->save($path);
+		array_push($response, $id);		
 			$this->renderPartial("uploaded", array("response" => json_encode($response)));
 	}
 
@@ -40,7 +41,7 @@ class ImageController extends Controller
 				$image = $this->getOrigin($pid);
 		}
 
-		$this->renderPartial("getlink", array("picture" => json_encode($image)))
+		$this->renderPartial("getlink", array("picture" => json_encode($image)));
 	}
 
 	public function actionConfirmed($pid){
@@ -50,10 +51,14 @@ class ImageController extends Controller
 
 		if($result == 1){
 			$this->toResizeQueue($pid);
-			renderPartial("picture", array("act" => "upd", "res" = true));
+			renderPartial("picture", array("act" => "upd", "res" => true));
 		}
 		else
-			renderPartial("picture", array("act" => "upd", "res" = false));
+			renderPartial("picture", array("act" => "upd", "res" => false));
+	}
+
+	public function actionGenerate(){
+		return 1;
 	}
 
 	private function toResizeQueue($pid){
@@ -92,8 +97,10 @@ class ImageController extends Controller
 		return Yii::app()->dbimage->getLastInsertID();
 	}
 
-	private function save(){
+	private function save($path){
 		$sql = "insert into image () values()";
+
+		return false;
 	}
 
 	private function getExtension($filename){

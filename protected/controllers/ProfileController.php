@@ -12,10 +12,10 @@ class ProfileController extends Controller
 		$this->render('main', array("num" => $num));
 	}
 
-	public function actionSignIn($jUser){
-		$login = false;
+	public function actionSignIn(){
+		$login = array("status" => false, "token" => 0);
 
-		$user = json_decode($jUser);
+		$user = json_decode($_POST["jUsr"]);
 
 		$query = connect();
 		$query->select("*");
@@ -25,10 +25,12 @@ class ProfileController extends Controller
 					  		":pass" => $user["hash"],
 					  		":soap" => $user["email"]));
 
-		if($query->queryRow() > 0)
-			$login = true;
+		if($query->queryRow() > 0){
+			$login["status"] = true;
+			$login["token"] = 1;
+		}
 
-		$this->renderPartial("signin", array("signin" => $login));
+		$this->renderPartial("signin", array("signin" => json_encode($login)));
 	}
 
 	public function actionGet($user){
@@ -38,20 +40,22 @@ class ProfileController extends Controller
 		$this->renderPartial("profile", array("account" => $account, "act" => "get"));
 	}
 
-	public function actionNew($user){
-		$query = $this->connect();
+	public function actionNew(){
+		$user = json_decode($_POST["jUsr"], true);
+		
 
-		$route = Yii::app()->createController("octopus/main");
-		$imageRoute = $route[0]->getRoute("picture");
+		//$route = Yii::app()->createController("octopus/image");
+		//$imageRoute = $route[0]->getRoute("picture");
 
-		$image = Yii::app()->createController($imageRoute."/generate");
+		$image = Yii::app()->createController("image/generate");
 		$avatar = $image[0]->actionGenerate();
 
-		$sql = "insert into profile(soap, soap_hashed, passwd, cdate, avatar_id) values(:soap, :soap_hashed, :pass, now(), :avatar)";
-		$query->bindParam(":soap", $user["soap"]);
-		$query->bindParam(":soap_hashed", md5($user["soap"]));
+		$sql = "insert into profile(soap, hashed_soap, passwd, cdate, avatar_id) values(:soap, :soap_hashed, :pass, now(), :avatar)";
+		$query = $this->connect($sql);
+		$query->bindParam(":soap", $user["email"]);
+		$query->bindParam(":soap_hashed", md5($user["email"]));
 		$query->bindParam(":pass", md5($user["pass"]));
-		$query->bindParam(":avatar", $avatar["pid"]);
+		$query->bindParam(":avatar", $avatar);
 
 		$query->execute();
 		$uid = $this->getLastUID();

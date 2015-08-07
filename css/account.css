@@ -201,7 +201,7 @@ html, body{
 
 .user-rating{
 	height: 15px;
-	bottom: 10px;
+	bottom: 0;
 	right: 20px;
 	line-height: 15px;
 	border-radius: 10px;
@@ -218,7 +218,7 @@ html, body{
 
 #left-toolbar{
 	width: 70px;
-	height: 90%;
+	height: inherit;
 	top: 90px;
 	border-style: solid;
 	border-width: 1px;
@@ -363,7 +363,7 @@ span.glyphicon-home {
 	padding-top: 10px;
 	border-style: solid;
 	border-color: #193b9c;
-	border-width: 0 1px 1px 1px;	
+	border-width: 0 1px 1px 1px;
 }
 
 .community-bar{
