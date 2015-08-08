@@ -63,9 +63,26 @@ class ImageController extends Controller
 
 	private function newPartition(){
 		$folderName = uniqid();
+
+		$sql = "insert into partitions (fname, cdate) values (:fname, now())";
+		$query = $this->connect($sql);
+		$query->bindParam(":fname", $folderName);
+		$query->execute();
+		
 		mkdir(Yii::app()->request->baseUrl."/images/".$folderName);
 
 		return $folderName;
+	}
+
+	private function getPartition($date){
+		$query = $this->connect();
+
+		$query->select("fname");
+		$query->from("partitions");
+		$query->where("cdate = :date", array(":date" => $date));
+		$partition = $query->queryRow();
+
+		return $partition["fname"];
 	}
 
 	private function toResizeQueue($pid){
@@ -96,8 +113,11 @@ class ImageController extends Controller
 		return $query->queryRow();
 	}
 
-	private function connect(){
-		return Yii::app()->dbimgae->createCommand();
+	private function connect($command = ""){
+		if(count($command) == 0)
+			return Yii::app()->dbimage->createCommand();
+		else
+			return Yii::app()->dbimage->createCommand($command);
 	}
 
 	private function getLastUID(){
