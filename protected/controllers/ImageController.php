@@ -85,6 +85,20 @@ class ImageController extends Controller
 		return $partition["fname"];
 	}
 
+	private function partitionExists($date){
+		$query = $this->connect();
+
+		$query->select("fname");
+		$query->from("partitions");
+		$query->where("cdate = :date", array(":date" => $date));
+		$partition = $query->queryRow();
+
+		if(count($partition) > 0)
+			return true;
+		else
+			return false;
+	}
+
 	private function toResizeQueue($pid){
 		$sql = "insert into resize_queue (image_id, cdate) values(:pid, now())";
 
