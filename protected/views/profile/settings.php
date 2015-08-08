@@ -2,7 +2,7 @@
 	<tr>
 		<td>
 			<div class="avatar-settings">
-				<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/octopus_blue.png" alt="">
+				<img src="<?php echo Yii::app()->request->baseUrl.$account["avatar"]; ?>" alt="">
 				<div class="upload-avatar">
 					<input type="file" id="uplAvatar">
 				</div>

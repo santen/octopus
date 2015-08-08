@@ -61,6 +61,13 @@ class ImageController extends Controller
 		return 1;
 	}
 
+	private function newPartition(){
+		$folderName = uniqid();
+		mkdir(Yii::app()->request->baseUrl."/images/".$folderName);
+
+		return $folderName;
+	}
+
 	private function toResizeQueue($pid){
 		$sql = "insert into resize_queue (image_id, cdate) values(:pid, now())";
 

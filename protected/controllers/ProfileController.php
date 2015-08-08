@@ -36,6 +36,11 @@ class ProfileController extends Controller
 	public function actionGet($uid){		
 		$account = json_encode($this->get($uid));
 
+		$image = Yii::app()->createController("image/generate");
+		$avatar = $image[0]->actionGetLink($account["avatar_id"], "md");
+
+		array_merge($account, array("avatar" => $avatar));
+
 		$this->render("settings", array("account" => $account));
 	}
 
