@@ -33,11 +33,10 @@ class ProfileController extends Controller
 		$this->renderPartial("signin", array("signin" => json_encode($login)));
 	}
 
-	public function actionGet($user){
-		$user = json_decode($user);
-		$account = json_encode($this->get($user["uid"]));
+	public function actionGet($uid){		
+		$account = json_encode($this->get($uid));
 
-		$this->renderPartial("profile", array("account" => $account, "act" => "get"));
+		$this->render("settings", array("account" => $account));
 	}
 
 	public function actionNew(){
@@ -60,9 +59,10 @@ class ProfileController extends Controller
 		$query->execute();
 		$uid = $this->getLastUID();
 
-		$account = json_encode($this->get($uid));
+		$page = array();
+		array_push("page", "profile/get/".$uid);
 
-		$this->renderPartial("profile", array("account" => $account, "act" => "get"));
+		$this->renderPartial("profile", json_encode($page), "act" => "get"));
 	}
 
 	public function actionRemove($user){
