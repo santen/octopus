@@ -8,16 +8,28 @@ class ImageController extends Controller
 	}
 
 	public function actionUpload(){
+		$curDate = date("Y-m-d");
+		if($this->partitionExists($curDate))
+			$path = "images/".$this->getPartition($curDate)."/";
+		else
+			$path = "images/".$this->newPartition()."/";
+
 		$picture = $_FILES["picture"];
 
 		$extension = $this->getExtension($picture["name"]);
-		$path = "pictures/";
+		$fullPath = $path.$picture["tmp_name"].".".$extension;
 		$image = new CUploadedFile($picture, $picture["tmp_name"], "image/".$extension, $picture["size"], 0);
-		$image->saveAs($path);
+		$image->saveAs($fullPath);
+		$imageSize = getimagesize($fullPath);
+		
+		$figure = array();
+		array_merge($figure, array("origin" => $fullPath));
+		array_merge($figure, array("width" => $imageSize[0]));
+		array_merge($figure, array("height" => $imageSize[1]));
+		$id = $this->newPicture($figure);
 
 		$response = array();
-		$id = $this->save($path);
-		array_push($response, $id);		
+		array_push($response, $id);
 			$this->renderPartial("uploaded", array("response" => json_encode($response)));
 	}
 
