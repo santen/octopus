@@ -61,6 +61,18 @@ class ImageController extends Controller
 		return 1;
 	}
 
+	private function newPicture($picture){
+		$sql = "insert into image(origin, cdate, is_default, width, height)
+				values (:origin, now(), 0, :width, :height)";
+		$query = $this->connect($sql);
+		$query->bindParam(":origin", $picture["origin"]);
+		$query->bindParam(":width", $picture["width"]);
+		$query->bindParam(":height", $picture["height"]);
+		$query->execute();
+
+		return $this->getLastPID();
+	}
+
 	private function newPartition(){
 		$folderName = uniqid();
 
@@ -134,7 +146,7 @@ class ImageController extends Controller
 			return Yii::app()->dbimage->createCommand($command);
 	}
 
-	private function getLastUID(){
+	private function getLastPID(){
 		return Yii::app()->dbimage->getLastInsertID();
 	}
 
