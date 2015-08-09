@@ -139,6 +139,12 @@ class ImageController extends Controller
 		return $query->queryRow();
 	}
 
+	private function getExtension($filename){
+		$extension = explode(".", $filename)[1];
+
+		return $extension;
+	}
+
 	private function connect($command = ""){
 		if(count($command) == 0)
 			return Yii::app()->dbimage->createCommand();
@@ -148,12 +154,6 @@ class ImageController extends Controller
 
 	private function getLastPID(){
 		return Yii::app()->dbimage->getLastInsertID();
-	}
-
-	private function save($path){
-		$sql = "insert into image () values()";
-
-		return false;
 	}
 
 	private function getExtension($filename){
