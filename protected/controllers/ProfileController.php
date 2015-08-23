@@ -34,14 +34,14 @@ class ProfileController extends Controller
 	}
 
 	public function actionGet($uid){		
-		$account = json_encode($this->get($uid));
+		$profile = $this->get($uid);
 
-		$image = Yii::app()->createController("image/generate");
-		$avatar = $image[0]->actionGetLink($account["avatar_id"], "md");
+		$image = Yii::app()->createController("image/actiongetlink");
+		$avatar = $image[0]->actionGetLink($profile["avatar_id"]);
 
-		array_merge($account, array("avatar" => $avatar));
+		$profile = array_merge($profile, array("avatar" => $avatar));
 
-		$this->render("settings", array("account" => $account));
+		$this->render("settings", array("profile" => $profile));
 	}
 
 	public function actionNew(){
@@ -65,9 +65,9 @@ class ProfileController extends Controller
 		$uid = $this->getLastUID();
 
 		$page = array();
-		array_push("page", "profile/get/".$uid);
+		$page = array_merge($page, array("path" => "profile/get&uid=".$uid));
 
-		$this->renderPartial("profile", json_encode($page), "act" => "get"));
+		$this->renderPartial("profile", array("page" => json_encode($page), "act" => "get"));
 	}
 
 	public function actionRemove($user){
@@ -141,7 +141,7 @@ class ProfileController extends Controller
 
 		$query->select("*");
 		$query->from("profile");
-		$query->where("id = :uid", array("uid" => $user["uid"]));
+		$query->where("id = :uid", array(":uid" => $uid));
 
 		$account = $query->queryRow();
 

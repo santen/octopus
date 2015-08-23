@@ -1,3 +1,12 @@
+var usr = {
+			email: "",
+			pass: "",
+			retype: "",
+			page: "",
+			avatar: "",
+			rating: "",
+			name: ""}
+
 $(document).ready(function(){	
     //$(".community-bar").perfectScrollbar();	
 
@@ -47,20 +56,18 @@ $(document).ready(function(){
 	});
 
 	$("#enterBtn").click(function(){
-		var usr = {
-			email: $("#email").val(),
-			pass: $("#pass").val(),
-			avatar: "",
-			rating: 124.03,
-			name: "sh2kerr"
-		};
+		window.usr.email = $("#email").val();
+		window.usr.pass = $("#pass").val();
+		window.usr.avatar = "";
+		window.usr.rating = 124.03;
+		window.usr.name = "sh2kerr";
 
 		$("#authWindow").hide();		
 		
 		$.ajax({
 			type: "POST",
 			url: "index.php?r=/profile/signin",
-			data: "jUsr=" + JSON.stringify(usr),
+			data: "jUsr=" + JSON.stringify(window.usr),
 			success: function(response){
 				var res = JSON.parse(response);
 				if(res.token != 0)
@@ -70,38 +77,53 @@ $(document).ready(function(){
 	});
 
 	$("#regBtn").click(function(){
-		var usr = {
-			email: $("#emailr").val(),
-			pass: $("#passr").val(),
-			retype: $("#retype").val(),
-			page: ""
-		};
+		console.log(JSON.stringify(window.usr));
 
-		console.log(JSON.stringify(usr));
+		window.usr.email = $("#emailr").val();
+		window.usr.pass = $("#passr").val();
+		window.usr.retype = $("#retype").val();
 
 		$.ajax({
 			type: "POST",
 			url: "index.php?r=/profile/new",
-			data: "jUsr="+ JSON.stringify(usr),
+			data: "jUsr="+ JSON.stringify(window.usr),
 			success: function(response){
 				var res = JSON.parse(response);
-				usr.page = res.path;
-			}/*,
-			complete: function(){
-				if(usr.page.length > 0)
-					window.location.replace(usr.page);
-			}*/
+				window.usr.page = res.path;
+				window.location.href = "index.php?r=" + window.usr.page;
+			}
 		});
 	});
 
 	function userBlockBuild(usr){
-		$(".user-block").children().remove();
+		/*$(".user-block").children().remove();
 
 		$(".user-block").append("<div class='avatar-wrap'></div>");
 		$(".avatar-wrap").append("<img class='avatar-xs' src='"+ usr.avatar +"'>");
 		$(".user-block").append("<div class='user-name'>"+ usr.name +"</div>");
 		$(".user-name").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'></a>");
 		$(".dropdown-toggle").append("<span class='caret'></span>");
-		$(".user-block").append("<div class='user-rating'>&nbsp;"+ usr.rating +"&nbsp;</div>");
+		$(".user-block").append("<div class='user-rating'>&nbsp;"+ usr.rating +"&nbsp;</div>");*/
 	}
+
+	$("#uplAvatarBtn").click(function(){
+		$("#uplAvatarFile").click();
+	});
+
+	$("#uplAvatarFile").change(function(){
+		var fdAvatar = new FormData();
+		fdAvatar.append("image", $("#uplAvatarFile")[0].files[0]);
+
+		$.ajax({
+			type: "POST",
+			url: "index.php?r=/image/upload",
+			processData: false,
+			contentType: false,
+			data: fdAvatar,
+			success: function(response){
+				res = JSON.parse(response);
+				$("#avatarImg").attr("src", "/octopus/"+res.link);
+			}			
+		});
+	});
 });

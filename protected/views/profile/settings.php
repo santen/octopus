@@ -1,15 +1,15 @@
 <table class="settings">
 	<tr>
 		<td>
-			<div class="avatar-settings">
-				<img src="<?php echo Yii::app()->request->baseUrl.$account["avatar"]; ?>" alt="">
-				<div class="upload-avatar">
-					<input type="file" id="uplAvatar">
+			<form action="" method="POST" role="form" enctype="multipart/form-data">
+				<div class="avatar-settings">
+					<?php echo "<img src='".$profile["avatar"]."' alt='' id='avatarImg'>"; ?>
+					<div class="upload-avatar">
+						<input type="file" id="uplAvatarFile">
+					</div>
+					<button type="button" class="btn btn-default btn-sm" id="uplAvatarBtn">Загрузить</button>
 				</div>
-				<button type="button" class="btn btn-default btn-sm">Загрузить</button>
-			</div>
-			<div class="form-container">
-				<form action="" method="POST" role="form">
+				<div class="form-container">				
 					<legend>Изменить проходное слово</legend>
 
 					<div class="form-group input-group-sm">
@@ -25,9 +25,9 @@
 						<input type="text" class="form-control" id="newRetype" placeholder="Input field">
 					</div>	
 
-					<button type="button" class="btn btn-primary btn-sm" id="savePassBtn">Сохранить</button>
-				</form>
-			</div>
+					<button type="button" class="btn btn-primary btn-sm" id="savePassBtn">Сохранить</button>					
+				</div>
+			</form>
 		</td>
 		<td>
 			<div class="form-container">

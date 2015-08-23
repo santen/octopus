@@ -10,7 +10,7 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/jQuery/jquery-ui.min.js" language="JavaScript"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/bootstrap-3.3.2/js/bootstrap.min.js" language="JavaScript"></script>		
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/octopus.js?8943" language="JavaScript"></script>
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<title><?php echo CHtml::encode($this->pageTitle); echo get_current_user();?></title>
 </head>
 
 <body>

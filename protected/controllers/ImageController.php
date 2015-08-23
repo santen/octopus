@@ -8,33 +8,38 @@ class ImageController extends Controller
 	}
 
 	public function actionUpload(){
-		$curDate = date("Y-m-d");
+		$curDate = date_format(date_create(), "Y-m-d");
 		if($this->partitionExists($curDate))
 			$path = "images/".$this->getPartition($curDate)."/";
 		else
 			$path = "images/".$this->newPartition()."/";
 
-		$picture = $_FILES["picture"];
+		
+
+		$picture = $_FILES["image"];
 
 		$extension = $this->getExtension($picture["name"]);
-		$fullPath = $path.$picture["tmp_name"].".".$extension;
+		$fullPath = $path.explode("/", $picture["tmp_name"])[2].".".$extension;
 		$image = new CUploadedFile($picture, $picture["tmp_name"], "image/".$extension, $picture["size"], 0);
 		$image->saveAs($fullPath);
 		$imageSize = getimagesize($fullPath);
 		
 		$figure = array();
-		array_merge($figure, array("origin" => $fullPath));
-		array_merge($figure, array("width" => $imageSize[0]));
-		array_merge($figure, array("height" => $imageSize[1]));
+		$figure = array_merge($figure, array("origin" => $fullPath));
+		$figure = array_merge($figure, array("width" => $imageSize[0]));
+		$figure = array_merge($figure, array("height" => $imageSize[1]));
 		$id = $this->newPicture($figure);
 
 		$response = array();
-		array_push($response, $id);
-			$this->renderPartial("uploaded", array("response" => json_encode($response)));
+		$response = array_merge($response, array("pid" => $id, "link" => $fullPath));
+
+		$this->toResizeQueue($id);
+
+		$this->renderPartial("uploaded", array("response" => json_encode($response)));
 	}
 
 	//@param size = xs||sm||md||lg default value is original
-	public function actionGetLink($pid, $size){
+	public function actionGetLink($pid, $size = ""){
 
 		switch(strtolower($size)){
 			case "xs":
@@ -52,8 +57,8 @@ class ImageController extends Controller
 			default:
 				$image = $this->getOrigin($pid);
 		}
-
-		$this->renderPartial("getlink", array("picture" => json_encode($image)));
+		return $image;
+		$this->renderPartial("getlink", array("picture" => $image));
 	}
 
 	public function actionConfirmed($pid){
@@ -85,39 +90,44 @@ class ImageController extends Controller
 		return $this->getLastPID();
 	}
 
-	private function newPartition(){
+	//private
+	public function newPartition(){
 		$folderName = uniqid();
 
 		$sql = "insert into partitions (fname, cdate) values (:fname, now())";
 		$query = $this->connect($sql);
 		$query->bindParam(":fname", $folderName);
 		$query->execute();
+		$query->reset();		
 		
-		mkdir(Yii::app()->request->baseUrl."/images/".$folderName);
+		$path = "/home/st3rax/web/octopus/images/".$folderName;
+		mkdir($path, 0777);
 
 		return $folderName;
 	}
 
-	private function getPartition($date){
+	//private
+	public function getPartition($date){
 		$query = $this->connect();
 
 		$query->select("fname");
 		$query->from("partitions");
-		$query->where("cdate = :date", array(":date" => $date));
+		$query->where("cdate > :date", array(":date" => $date));
 		$partition = $query->queryRow();
 
 		return $partition["fname"];
 	}
 
-	private function partitionExists($date){
+	//private
+	public function partitionExists($date){
 		$query = $this->connect();
 
-		$query->select("fname");
+		$query->select("count(fname) as partitions");
 		$query->from("partitions");
-		$query->where("cdate = :date", array(":date" => $date));
-		$partition = $query->queryRow();
+		$query->where("cdate > :date", array(":date" => $date));
+		$partitions = $query->queryRow();
 
-		if(count($partition) > 0)
+		if($partitions["partitions"] != 0)
 			return true;
 		else
 			return false;
@@ -126,8 +136,9 @@ class ImageController extends Controller
 	private function toResizeQueue($pid){
 		$sql = "insert into resize_queue (image_id, cdate) values(:pid, now())";
 
-		$query = $this->connect();
+		$query = $this->connect($sql);
 		$query->bindParam(":pid", $pid);
+
 		return $query->execute();
 	}
 
@@ -138,7 +149,7 @@ class ImageController extends Controller
 		$query->from("image");
 		$query->where("id = :id", array(":id" => $pid));
 
-		return $query->queryRow();
+		return $query->queryRow()["origin"];
 	}
 
 	private function getPicture($pid, $size){
@@ -166,12 +177,6 @@ class ImageController extends Controller
 
 	private function getLastPID(){
 		return Yii::app()->dbimage->getLastInsertID();
-	}
-
-	private function getExtension($filename){
-		$extension = explode(".", $filename)[1];
-
-		return $extension;
 	}
 	// Uncomment the following methods and override them if needed
 	/*
