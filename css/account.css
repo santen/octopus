@@ -606,3 +606,32 @@ table.settings{
 }
 
 /* end Auth Window */
+
+/* images layout */
+.images-layout{
+	width: 1100px;
+}
+
+.image-row-1{
+	width: 1100px;
+}
+
+.image-row-2{
+	width: 545px;
+	margin: 5px;
+}
+
+.image-row-3{
+	width: 360px;
+	margin: 5px;
+}
+
+.image-row-4{
+	width: 360px;
+	margin-right: 375px;
+	margin-left: 375px;
+}
+
+
+
+/* end images layout */

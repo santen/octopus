@@ -56,7 +56,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=profile',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'siteserver',
+			'password' => '',
 			'charset' => 'utf8',
 			),
 		'dboctopus'=>array(
@@ -64,7 +64,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=octopus',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'siteserver',
+			'password' => '',
 			'charset' => 'utf8',
 			),
 		'dbimage'=>array(
@@ -72,7 +72,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=image',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'siteserver',
+			'password' => '',
 			'charset' => 'utf8',
 			),
 		'dbtoken'=>array(
@@ -80,7 +80,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=token',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'siteserver',
+			'password' => '',
 			'charset' => 'utf8',
 			),
 
